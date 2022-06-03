@@ -1,2 +1,11 @@
 # erdos-proj-rosetta-sp22
-Project for Erdos Institute bootcamp by team Rosetta
+
+### Team Rosetta (Amin Idelhaj, Hannah Alpert, Soumya Sankar)
+
+We use the  [Default of Credit Card Clients data set](https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients) from the UC Irvine Machine Learning Repository.  This spreadsheet comes from the 2009 paper "The comparisons of data mining techniques for the predictive accuracy of probability of default of credit card clients," by I.C. Yeh and C.H. Lien in the journal *Expert Systems with Applications*. Each row of the data spreadsheet gives payment history of a credit card client of a particular Taiwanese bank, who either did or did not default on the payment due in October 2005.  We saved the spreadsheet as a CSV file, included here as `default.csv`.
+
+The first notebook, `1-import-data.ipynb`, shows how to interpret each cell of the spreadsheet.  The second notebook, `2-explorations.ipynb`, gives exploratory data analysis, showing histograms and tables to give an idea of which features may be most useful in distinguishing defaulters from non-defaulters.
+
+In the third notebook, `3-compare-models.ipynb`, we make a naive choice of how to clean and preprocess the spreadsheet, and then feed it into several different classification algorithms.  We use cross-validation, fitting each model on one subset of the clients and then testing it on another subset, over and over.  Each time, we evaluate the model's performance using the area ratio, which is based on the area under the receiver operating characteristic (ROC) curve.  Specifically, the area ratio is equal to (area between the model's ROC curve and that of random guessing) / (area between the perfect ROC curve and that of random guessing), which is equal to ((area under the model's ROC curve) - .5)/.5.  We compare area ratios for different choices of parameter for each model, trying to make sure we are using parameters that give approximately the best performance.
+
+In the fourth notebook, `4-feature-selection.ipynb`, we focus on the random forest algorithm, implemented with the parameters chosen in the previous notebook.  We test many different possible sets of features, to see which gives the best area ratios under cross-validation.  We choose our favorite set of features.  Then in the fifth notebook, `5-final-choice.ipynb`, we make our final choices of best model, train them on the full training set of clients, and test them on the reserved testing set, summarizing the performance using several metrics and plots.
